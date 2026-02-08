@@ -8,8 +8,8 @@
         android:fillColor="#4FC3F7"
         android:pathData="M0,0h108v108h-108z"/>
     <group
-        android:translateX="24dp"
-        android:translateY="30dp">
+        android:translateX="24"
+        android:translateY="30">
         <!-- Notebook icon -->
         <path
             android:fillColor="#FFFFFF"
