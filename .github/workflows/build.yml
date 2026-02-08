@@ -27,38 +27,14 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Decode Keystore
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
+      - name: Build Debug APK (unsigned)
+        run: ./gradlew assembleDebug --stacktrace
 
-      - name: Build APK Release
-        env:
-          KEYSTORE_PATH: keystore.jks
-          KEYSTORE_PASSWORD: Catatanku2025
-          KEY_ALIAS: catatanku
-          KEY_PASSWORD: Catatanku2025
-        run: ./gradlew assembleRelease --stacktrace
-
-      - name: Build AAB Release
-        env:
-          KEYSTORE_PATH: keystore.jks
-          KEYSTORE_PASSWORD: Catatanku2025
-          KEY_ALIAS: catatanku
-          KEY_PASSWORD: Catatanku2025
-        run: ./gradlew bundleRelease --stacktrace
-
-      - name: Upload APK
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-apk
-          path: app/build/outputs/apk/release/app-release.apk
-          retention-days: 90
-
-      - name: Upload AAB
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release-aab
-          path: app/build/outputs/bundle/release/app-release.aab
+          name: app-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 90
 
       - name: Get version info
@@ -75,5 +51,8 @@ jobs:
           echo "### Version: ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
-          echo "- **APK**: Available in artifacts (app-release-apk)" >> $GITHUB_STEP_SUMMARY
-          echo "- **AAB**: Available in artifacts (app-release-aab)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Debug APK**: Available in artifacts (app-debug-apk)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Note" >> $GITHUB_STEP_SUMMARY
+          echo "This is a debug build (unsigned). For signed release builds," >> $GITHUB_STEP_SUMMARY
+          echo "please set up the KEYSTORE_BASE64 secret in GitHub repository settings." >> $GITHUB_STEP_SUMMARY
