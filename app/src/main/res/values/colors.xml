@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Blue -->
+    <color name="primary">#4FC3F7</color>
+    <color name="primary_dark">#29B6F6</color>
+    <color name="primary_light">#B3E5FC</color>
+
+    <!-- Accent -->
+    <color name="accent">#29B6F6</color>
+
+    <!-- Background & Surface -->
+    <color name="background">#FAFAFA</color>
+    <color name="surface">#FFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
+    <!-- Note Card Colors -->
+    <color name="note_bg">#FFFFFF</color>
+    <color name="note_stroke">#E0E0E0</color>
+
+    <!-- Launcher Icon -->
+    <color name="ic_launcher_background">#4FC3F7</color>
+</resources>

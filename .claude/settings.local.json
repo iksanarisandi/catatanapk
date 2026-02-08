@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(keytool:*)",
+      "Bash(\"/c/Program Files/Java/jdk-22/bin/keytool.exe\" -genkey -v -keystore \"D:\\\\Dari Desktop\\\\Claude\\\\Android\\\\notesimpel\\\\keystore.jks\" -keyalg RSA -keysize 2048 -validity 10000 -alias catatanku -storepass Catatanku2025 -keypass Catatanku2025 -dname \"CN=Catatanku, OU=DariCreative, O=DariCreative, L=Jakarta, ST=Indonesia, C=ID\")",
+      "Bash(curl:*)",
+      "Bash(echo:*)",
+      "Bash(./gradlew build:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

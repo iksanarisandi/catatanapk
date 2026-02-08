@@ -1,0 +1,13 @@
+## This file is used to configure the location of your Android SDK.
+## You can copy this file to local.properties and update the path.
+
+# For Windows typical Android Studio installation:
+sdk.dir=C\\:\\Users\\\\YOUR_USERNAME\\\\AppData\\\\Local\\\\Android\\\\Sdk
+
+# Alternative: If you installed SDK in custom location:
+# sdk.dir=D\\:\\\\Android\\\\Sdk
+
+# Notes:
+# - Double backslashes are required (escaped)
+# - Replace YOUR_USERNAME with your actual Windows username
+# - Find your SDK location in Android Studio: File > Settings > Appearance & Behavior > System Settings > Android SDK
