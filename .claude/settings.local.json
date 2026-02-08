@@ -15,7 +15,9 @@
       "Bash(gh run view:*)",
       "Bash(\"/c/Program Files/Java/jdk-22/bin/keytool.exe\" -genkeypair -v -keystore \"D:\\\\Dari Desktop\\\\Claude\\\\Android\\\\notesimpel\\\\keystore.jks\" -keyalg RSA -keysize 2048 -validity 10000 -alias catatanku -storepass Catatanku2025 -keypass Catatanku2025 -dname \"CN=Catatanku, OU=DariCreative, O=DariCreative, L=Jakarta, ST=Indonesia, C=ID\" -ext SAN=DNS:catatanku,IP:127.0.0.1)",
       "Bash(\"/c/Program Files/Java/jdk-22/bin/keytool.exe\" -genkeypair -v -storetype PKCS12 -keystore \"D:\\\\Dari Desktop\\\\Claude\\\\Android\\\\notesimpel\\\\keystore.jks\" -keyalg RSA -keysize 2048 -validity 10000 -alias catatanku -storepass Catatanku2025 -keypass Catatanku2025 -dname \"CN=Catatanku, OU=DariCreative, O=DariCreative, L=Jakarta, ST=Indonesia, C=ID\")",
-      "Bash(\"/c/Program Files/Java/jdk-22/bin/keytool.exe\" -genkeypair -v -storetype JKS -keystore \"D:\\\\Dari Desktop\\\\Claude\\\\Android\\\\notesimpel\\\\keystore.jks\" -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 10000 -alias catatanku -storepass Catatanku2025 -keypass Catatanku2025 -dname \"CN=Catatanku, OU=DariCreative, O=DariCreative, L=Jakarta, ST=Indonesia, C=ID\")"
+      "Bash(\"/c/Program Files/Java/jdk-22/bin/keytool.exe\" -genkeypair -v -storetype JKS -keystore \"D:\\\\Dari Desktop\\\\Claude\\\\Android\\\\notesimpel\\\\keystore.jks\" -keyalg RSA -keysize 2048 -sigalg SHA256withRSA -validity 10000 -alias catatanku -storepass Catatanku2025 -keypass Catatanku2025 -dname \"CN=Catatanku, OU=DariCreative, O=DariCreative, L=Jakarta, ST=Indonesia, C=ID\")",
+      "Bash(\"/c/Program Files/Java/jdk-22/bin/keytool.exe\":*)",
+      "Bash(gh secret set:*)"
     ]
   }
 }

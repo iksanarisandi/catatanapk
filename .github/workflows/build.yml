@@ -27,14 +27,38 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Debug APK (unsigned)
-        run: ./gradlew assembleDebug --stacktrace
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
 
-      - name: Upload Debug APK
+      - name: Build Release APK
+        env:
+          KEYSTORE_PATH: keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Build Release AAB
+        env:
+          KEYSTORE_PATH: keystore.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew bundleRelease --stacktrace
+
+      - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: app-release-apk
+          path: app/build/outputs/apk/release/app-release.apk
+          retention-days: 90
+
+      - name: Upload Release AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: app/build/outputs/bundle/release/app-release.aab
           retention-days: 90
 
       - name: Get version info
@@ -46,13 +70,14 @@ jobs:
 
       - name: Create Release Summary
         run: |
-          echo "## Build Complete! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎉 Build Complete!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Version: ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
-          echo "- **Debug APK**: Available in artifacts (app-debug-apk)" >> $GITHUB_STEP_SUMMARY
+          echo "### 📦 Signed Artifacts" >> $GITHUB_STEP_SUMMARY
+          echo "- **APK**: \`app-release.apk\` (ready for installation)" >> $GITHUB_STEP_SUMMARY
+          echo "- **AAB**: \`app-release.aab\` (ready for Play Store)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Note" >> $GITHUB_STEP_SUMMARY
-          echo "This is a debug build (unsigned). For signed release builds," >> $GITHUB_STEP_SUMMARY
-          echo "please set up the KEYSTORE_BASE64 secret in GitHub repository settings." >> $GITHUB_STEP_SUMMARY
+          echo "### 🔐 Signing Info" >> $GITHUB_STEP_SUMMARY
+          echo "- Signed with release keystore" >> $GITHUB_STEP_SUMMARY
+          echo "- SHA256withRSA signature" >> $GITHUB_STEP_SUMMARY
