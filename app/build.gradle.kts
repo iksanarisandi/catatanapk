@@ -19,11 +19,18 @@ android {
     signingConfigs {
         create("release") {
             val keystorePath = System.getenv("KEYSTORE_PATH")
-            if (keystorePath != null) {
+            val storePass = System.getenv("KEYSTORE_PASSWORD")
+            val keyAlias = System.getenv("KEY_ALIAS")
+            val keyPass = System.getenv("KEY_PASSWORD")
+
+            if (keystorePath != null && storePass != null && keyAlias != null && keyPass != null) {
                 storeFile = file(keystorePath)
-                storePassword = System.getenv("KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("KEY_ALIAS")
-                keyPassword = System.getenv("KEY_PASSWORD")
+                storePassword = storePass
+                this.keyAlias = keyAlias
+                keyPassword = keyPass
+            } else {
+                // Enable signing for debug builds
+                storeFile = null
             }
         }
     }
