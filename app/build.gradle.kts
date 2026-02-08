@@ -35,7 +35,7 @@ android {
     if (keystorePath != null && storePass != null && keyAlias != null && keyPass != null) {
         signingConfigs {
             create("release") {
-                storeFile = file(keystorePath)
+                storeFile = project.rootProject.file(keystorePath)
                 storePassword = storePass
                 this.keyAlias = keyAlias
                 keyPassword = keyPass
