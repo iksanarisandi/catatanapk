@@ -32,9 +32,19 @@ jobs:
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
 
       - name: Build APK Release
+        env:
+          KEYSTORE_PATH: keystore.jks
+          KEYSTORE_PASSWORD: Catatanku2025
+          KEY_ALIAS: catatanku
+          KEY_PASSWORD: Catatanku2025
         run: ./gradlew assembleRelease --stacktrace
 
       - name: Build AAB Release
+        env:
+          KEYSTORE_PATH: keystore.jks
+          KEYSTORE_PASSWORD: Catatanku2025
+          KEY_ALIAS: catatanku
+          KEY_PASSWORD: Catatanku2025
         run: ./gradlew bundleRelease --stacktrace
 
       - name: Upload APK
