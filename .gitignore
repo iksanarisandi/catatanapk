@@ -87,3 +87,4 @@ lint-results*.html
 
 # Android Profiling
 *.hprof
+keystore.jks

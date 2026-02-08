@@ -16,33 +16,33 @@ android {
         versionName = "1.0.0"
     }
 
-    signingConfigs {
-        create("release") {
-            val keystorePath = System.getenv("KEYSTORE_PATH")
-            val storePass = System.getenv("KEYSTORE_PASSWORD")
-            val keyAlias = System.getenv("KEY_ALIAS")
-            val keyPass = System.getenv("KEY_PASSWORD")
-
-            if (keystorePath != null && storePass != null && keyAlias != null && keyPass != null) {
-                storeFile = file(keystorePath)
-                storePassword = storePass
-                this.keyAlias = keyAlias
-                keyPassword = keyPass
-            } else {
-                // Enable signing for debug builds
-                storeFile = null
-            }
-        }
-    }
-
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+
+    // Setup signing config if env vars are available
+    val keystorePath = System.getenv("KEYSTORE_PATH")
+    val storePass = System.getenv("KEYSTORE_PASSWORD")
+    val keyAlias = System.getenv("KEY_ALIAS")
+    val keyPass = System.getenv("KEY_PASSWORD")
+
+    if (keystorePath != null && storePass != null && keyAlias != null && keyPass != null) {
+        signingConfigs {
+            create("release") {
+                storeFile = file(keystorePath)
+                storePassword = storePass
+                this.keyAlias = keyAlias
+                keyPassword = keyPass
+            }
+        }
+        buildTypes.named("release").configure {
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
