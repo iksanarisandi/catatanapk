@@ -73,16 +73,17 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun updateEmptyState(isEmpty: Boolean) {
-        emptyState.visibility = if (isEmpty) {
+        if (isEmpty) {
+            emptyState.visibility = android.view.View.VISIBLE
             rvNotes.visibility = android.view.View.GONE
-            android.view.View.VISIBLE
         } else {
-            android.view.View.GONE
+            emptyState.visibility = android.view.View.GONE
+            rvNotes.visibility = android.view.View.VISIBLE
         }
     }
 
     private fun showNoteDialog(note: NoteEntity?) {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_note, null)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_note, null) as LinearLayout
         val etTitle = dialogView.findViewById<EditText>(R.id.etTitle)
         val etContent = dialogView.findViewById<EditText>(R.id.etContent)
 
@@ -92,7 +93,6 @@ class MainActivity : ComponentActivity() {
         }
 
         val dialog = AlertDialog.Builder(this)
-            .setView(dialogView)
             .create()
 
         val dialogTitle = TextView(this).apply {
@@ -150,14 +150,14 @@ class MainActivity : ComponentActivity() {
 
         val buttonContainer = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
-            setPadding(40, 20, 40, 40)
+            setPadding(0, 20, 0, 0)
             gravity = android.view.Gravity.END
             addView(btnCancel)
             addView(btnSave)
         }
 
+        dialogView.addView(buttonContainer)
         dialog.setView(dialogView)
-        dialog.setView(buttonContainer)
 
         dialog.show()
         dialog.window?.setLayout(
