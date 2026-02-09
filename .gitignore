@@ -50,10 +50,9 @@ captures/
 .idea/misc.xml
 .idea/deploymentTargetDropDown.xml
 
-# Keystore files
-# Note: keystore.jks is included for this project
-# Uncomment the line below if you want to exclude it
-# *.jks
+# Keystore files - NEVER commit keystore files to git!
+*.jks
+*.keystore
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
